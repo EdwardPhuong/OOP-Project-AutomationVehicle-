@@ -10,10 +10,13 @@ class Vehicle:
         self.type = ""
         self.numberOfseat = 0
         self.passengers = []
+        self.passengersString = ""
         self.isCrashed = False
-    
+        self.totalPriority = 0
+        self.numberOfPassengers = 0
+
     def __str__(self):
-        return f"Name: {self.name}\nType: {self.type}\nNumber of Seat: {self.numberOfseat}\nIs Crashed: {self.isCrashed}"
+        return f"\n-Vehicle- \nName: {self.name}\nType: {self.type}\nNumber of Seat: {self.numberOfseat}\nIs Crashed: {self.isCrashed} \nTotal Passengers: {self.numberOfPassengers}\nPassengers: {self.passengersString}\nTotal Priority: {self.totalPriority}"
 
     def getVehicleName(self):
         try:
@@ -56,7 +59,35 @@ class Vehicle:
                 passenger = Passenger.Passenger()
                 passenger.getPassenger()
                 self.passengers.append(passenger)
-            return self.passengers
+                self.numberOfPassengers += 1
+            return self.numberOfPassengers
+        except Exception as e:
+            print(e)
+    
+    def getPassengers(self):
+        try:
+            passengersString = ""
+            passengers = self.passengers
+            for passenger in passengers:
+                if passenger.type != "Animal":
+                    passengerCareer = passenger.passenger.career
+                    if passengerCareer != "Executive":
+                        passengersString += str(passengerCareer[0])
+                    else:
+                        passengersString += str(passengerCareer[0] + passengerCareer[1])
+            self.passengersString = passengersString
+            return self.passengersString, self.passengers
+        except Exception as e:
+            print(f"Error: {e}")
+
+    def getTotalPriority(self):
+        try:
+            totalPriority = 0
+            for passenger in self.passengers:
+                priority = passenger.passenger.priority
+                totalPriority += priority
+            self.totalPriority = totalPriority
+            return self.totalPriority
         except Exception as e:
             print(e)
 
@@ -64,6 +95,8 @@ if __name__ == "__main__":
     myVehicle = Vehicle()
     myVehicle.getVehicle()
     passengers = myVehicle.loadPassenger()
-    for passenger in passengers:
-        print(passenger.passenger)
+    myVehicle.getTotalPriority()
+    myVehicle.getPassengers()
     print(myVehicle)
+    # for passenger in passengers:
+    #     print(passenger.passenger)

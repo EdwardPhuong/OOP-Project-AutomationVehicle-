@@ -4,32 +4,32 @@ import random
 import openpyxl
 
 
-#Pedestrians Class
+#pedestrian Class
 class Pedestrians:
     def __init__(self):
         self.type = ""
         self.isDead = False
-        self.pedestrians = None
+        self.pedestrian = None
 
     def __str__(self):
-        return f"Type: {self.type}\nIs Dead: {self.isDead} \nPedestrian: {self.pedestrians}"
+        return f"Type: {self.type}\nIs Dead: {self.isDead} \nPedestrian: {self.pedestrian}"
     
     def getPedestrians(self):
-        pedestriansTypes=["Human", "Animal"]
-        pedestriansSelector = random.choice(pedestriansTypes)
-        if str(pedestriansSelector) == "Human":
+        pedestrianTypes=["Human", "Animal"]
+        pedestrianSelector = random.choice(pedestrianTypes)
+        if str(pedestrianSelector) == "Human":
             self.type = "Human"
             human = Human.Human()
-            pedestrians = human.getHuman()
-            self.pedestrians = pedestrians
-        elif str(pedestriansSelector) == "Animal":
+            pedestrian = human.getHuman()
+            self.pedestrian = pedestrian
+        elif str(pedestrianSelector) == "Animal":
             self.type = "Animal"
             animal = Animal.Animal()
-            pedestrians = animal.getAnimal()
-            self.pedestrians = pedestrians
+            pedestrian = animal.getAnimal()
+            self.pedestrian = pedestrian
         return self
 
 if __name__ == "__main__":
-    myPedestrians = Pedestrians()
-    print(myPedestrians.getPedestrians())
+    mypedestrian = Pedestrians()
+    print(mypedestrian.getPedestrians())
     

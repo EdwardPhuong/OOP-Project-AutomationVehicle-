@@ -7,9 +7,10 @@ class Animal:
         self.name = ""
         self.species = ""
         self.age = 0
+        self.priority = 0
     
     def __str__(self):
-        return f"Species: {self.species}\nName: {self.name}\nAge: {self.age}"
+        return f"\n-Animal- \nSpecies: {self.species}\nName: {self.name}\nAge: {self.age}\nPriority: {self.priority}"
     def getSpecies(self):
         try:
             mySpecies = []
@@ -41,6 +42,7 @@ class Animal:
                         if name.value != None: #Except None
                             myNames.append(name.value) #Add Name to List
             self.name = random.choice(myNames) #Get Random Name
+            workbook.close()
             return self.name
         except Exception as e:
             print(e)
