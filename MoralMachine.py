@@ -158,6 +158,7 @@ class MoralMachine:
                 totalPassengersPriority = self.getTotalPriority("Passengers", myPassengers)
                 myOtherPedestrians = otherPedestrians[1]
                 totalOtherPedestriansPriority = self.getTotalPriority("Pedestrians", myOtherPedestrians)
+
                 # 0 = No Legal Complication
                 # 1 = Legal Complication (CURRENT LANE IS GREEN OTHER IS RED)
                 # 2 = Legal Complication (CURRENT LANE IS RED OTHER IS GREEN)
@@ -253,13 +254,169 @@ class MoralMachine:
                 print("\n------------------DECISIONS---------------------\n")
                 print("Saving More Lives \nSaving More Values People \nSaving More Female \nSaving Young Generation")
                 print("\n------------------DECISIONS---------------------\n")
+                myPedestrians = pedestrians[1]
+                totalPedestriansPriority = self.getTotalPriority("Pedestrians", myPedestrians)
+                myPassengers = passengers[1]
+                totalPassengersPriority = self.getTotalPriority("Passengers", myPassengers)
 
+                # 0 = No Legal Complication
+                # 1 = Legal Complication (CURRENT LANE IS GREEN OTHER IS RED)
+                # 2 = Legal Complication (CURRENT LANE IS RED OTHER IS GREEN)
+                #NOTICE -> NO PRIOTIY FOR UPHOLDING THE LAW.
+                # ==> COMBINE 3 SCENARIOS (NO LEGAL COMPLICATION)
+                if str(scenario[1]) == "0" or str(scenario[1]) == "1" or str(scenario[1]) == "2":
+                    if totalPassengersPriority > totalPedestriansPriority:
+                        print("Passengers > Pedestrians")
+                        for pedestrian in myPedestrians:
+                            pedestrian.isDead = True
+                            if pedestrian.type == "Human":
+                                numberOfHumansDeath += 1
+                                human = pedestrian.pedestrian.career
+                                humanTypes[human] = humanTypes.get(human, 0) + 1
+                            else:
+                                numberOfAnimalsDeath += 1
+                                animal = pedestrian.pedestrian.species
+                                animalTypes[animal] = animalTypes.get(animal, 0) + 1
+
+                        self.humansDeath = humanTypes
+                        self.animalsDeath = animalTypes
+                        self.numberOfHumansDeath += numberOfHumansDeath
+                        self.numberOfAnimalsDeath += numberOfAnimalsDeath
+
+                        for passenger in myPassengers:
+                            if passenger.type == "Human":
+                                numberOfHumansAlive += 1
+                            else:
+                                numberOfAnimalsAlive += 1
+
+                        self.numberOfHumansAlive += numberOfHumansAlive
+                        self.numberOfAnimalsAlive += numberOfAnimalsAlive
+                        print("\n----------------------SUMMARY---------------------\n")
+                        print(f"Passengers: {passengers[0]}")
+                        print(f"Total Passenger Priority: {totalPassengersPriority}")
+                        print(f"Pedestrians: {pedestrians[0]}")
+                        print(f"Total Pedestrian Priority: {totalPedestriansPriority}")
+                        print("\n----------------------SUMMARY---------------------\n")
+                        return False
+
+                    else:
+                        print("Pedestrians > Passengers")
+                        for passenger in myPassengers:
+                            passenger.isDead = True
+                            if passenger.type == "Human":
+                                numberOfHumansDeath += 1
+                                human = passenger.passenger.career
+                                humanTypes[human] = humanTypes.get(human, 0) + 1
+                            else:
+                                numberOfAnimalsDeath += 1
+                                animal = passenger.passenger.species
+                                animalTypes[animal] = animalTypes.get(animal, 0) + 1
+
+                        self.humansDeath = humanTypes
+                        self.animalsDeath = animalTypes
+                        self.numberOfHumansDeath += numberOfHumansDeath
+                        self.numberOfAnimalsDeath += numberOfAnimalsDeath
+
+                        for pedestrian in myPedestrians:
+                            if pedestrian.type == "Human":
+                                numberOfHumansAlive += 1
+                            else:
+                                numberOfAnimalsAlive += 1
+
+                        self.numberOfHumansAlive += numberOfHumansAlive
+                        self.numberOfAnimalsAlive += numberOfAnimalsAlive
+                        print("\n----------------------SUMMARY---------------------\n")
+                        print(f"Pedestrians: {pedestrians[0]}")
+                        print(f"Total Pedestrian Priority: {totalPedestriansPriority}")
+                        print(f"Passengers: {passengers[0]}")
+                        print(f"Total Passenger Priority: {totalPassengersPriority}")
+                        print("\n----------------------SUMMARY---------------------\n")
+                        return True
+                                
             # choose to stay in the lane and hit a concrete barricade that will kill
             # the group of passengers inside the vehicle or sway to hit concrete barricades.
             elif str(scenario[0]) == "2":
                 print("\n------------------DECISIONS---------------------\n")
                 print("Saving More Values People \nSaving More Lives \nSaving More Female \nSaving Young Generation")
                 print("\n------------------DECISIONS---------------------\n")
+                myPedestrians = pedestrians[1]
+                totalPedestriansPriority = self.getTotalPriority("Pedestrians", myPedestrians)
+                myPassengers = passengers[1]
+                totalPassengersPriority = self.getTotalPriority("Passengers", myPassengers)
+                
+                # 0 = No Legal Complication
+                # 1 = Legal Complication (CURRENT LANE IS GREEN OTHER IS RED)
+                # 2 = Legal Complication (CURRENT LANE IS RED OTHER IS GREEN)
+                #NOTICE -> NO PRIOTIY FOR UPHOLDING THE LAW.
+                # ==> COMBINE 3 SCENARIOS (NO LEGAL COMPLICATION)
+                if str(scenario[1]) == "0" or str(scenario[1]) == "1" or str(scenario[1]) == "2":
+                    if totalPassengersPriority > totalPedestriansPriority:
+                        print("Passengers > Pedestrians")
+                        for pedestrian in myPedestrians:
+                            pedestrian.isDead = True
+                            if pedestrian.type == "Human":
+                                numberOfHumansDeath += 1
+                                human = pedestrian.pedestrian.career
+                                humanTypes[human] = humanTypes.get(human, 0) + 1
+                            else:
+                                numberOfAnimalsDeath += 1
+                                animal = pedestrian.pedestrian.species
+                                animalTypes[animal] = animalTypes.get(animal, 0) + 1
+
+                        self.humansDeath = humanTypes
+                        self.animalsDeath = animalTypes
+                        self.numberOfHumansDeath += numberOfHumansDeath
+                        self.numberOfAnimalsDeath += numberOfAnimalsDeath
+
+                        for passenger in myPassengers:
+                            if passenger.type == "Human":
+                                numberOfHumansAlive += 1
+                            else:
+                                numberOfAnimalsAlive += 1
+
+                        self.numberOfHumansAlive += numberOfHumansAlive
+                        self.numberOfAnimalsAlive += numberOfAnimalsAlive
+                        print("\n----------------------SUMMARY---------------------\n")
+                        print(f"Passengers: {passengers[0]}")
+                        print(f"Total Passenger Priority: {totalPassengersPriority}")
+                        print(f"Pedestrians: {pedestrians[0]}")
+                        print(f"Total Pedestrian Priority: {totalPedestriansPriority}")
+                        print("\n----------------------SUMMARY---------------------\n")
+                        return True
+                    
+                    else:
+                        print("Pedestrians > Passengers")
+                        for passenger in myPassengers:
+                            passenger.isDead = True
+                            if passenger.type == "Human":
+                                numberOfHumansDeath += 1
+                                human = passenger.passenger.career
+                                humanTypes[human] = humanTypes.get(human, 0) + 1
+                            else:
+                                numberOfAnimalsDeath += 1
+                                animal = passenger.passenger.species
+                                animalTypes[animal] = animalTypes.get(animal, 0) + 1
+
+                        self.humansDeath = humanTypes
+                        self.animalsDeath = animalTypes
+                        self.numberOfHumansDeath += numberOfHumansDeath
+                        self.numberOfAnimalsDeath += numberOfAnimalsDeath
+
+                        for pedestrian in myPedestrians:
+                            if pedestrian.type == "Human":
+                                numberOfHumansAlive += 1
+                            else:
+                                numberOfAnimalsAlive += 1
+
+                        self.numberOfHumansAlive += numberOfHumansAlive
+                        self.numberOfAnimalsAlive += numberOfAnimalsAlive
+                        print("\n----------------------SUMMARY---------------------\n")
+                        print(f"Pedestrians: {pedestrians[0]}")
+                        print(f"Total Pedestrian Priority: {totalPedestriansPriority}")
+                        print(f"Passengers: {passengers[0]}")
+                        print(f"Total Passenger Priority: {totalPassengersPriority}")
+                        print("\n----------------------SUMMARY---------------------\n")
+                        return False
 
         except Exception as e:
             print(f"Error: {e}")
@@ -274,7 +431,7 @@ class MoralMachine:
 
             for i in range(0, numberOfScenarios):
                 scenario = self.getScenario()
-                print(f"\nScenario: {scenario[0]}")
+                print(f"\nScenario: {scenario}")
                 if scenario[0] != "0":
                     myVehicle = Vehicle.Vehicle()
                     myVehicle.getVehicle()
