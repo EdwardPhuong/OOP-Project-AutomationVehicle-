@@ -14,9 +14,11 @@ class Vehicle:
         self.isCrashed = False
         self.totalPriority = 0
         self.numberOfPassengers = 0
+        self.numberOfHumans = 0
+        self.numberOfAnimals = 0
 
     def __str__(self):
-        return f"\n-Vehicle- \nName: {self.name}\nType: {self.type}\nNumber of Seat: {self.numberOfseat}\nIs Crashed: {self.isCrashed} \nTotal Passengers: {self.numberOfPassengers}\nPassengers: {self.passengersString}\nTotal Priority: {self.totalPriority}"
+        return f"\n-Vehicle- \nName: {self.name}\nType: {self.type}\nNumber of Seat: {self.numberOfseat}\nIs Crashed: {self.isCrashed} \nTotal Passengers: {self.numberOfPassengers}\nNumber of Humans: {self.numberOfHumans}\nNumber of Animals: {self.numberOfAnimals}\nPassengers: {self.passengersString}\nTotal Priority: {self.totalPriority}"
 
     def getVehicleName(self):
         try:
@@ -58,6 +60,10 @@ class Vehicle:
             for i in range(0, self.numberOfseat):
                 passenger = Passenger.Passenger()
                 passenger.getPassenger()
+                if passenger.type == "Human":
+                    self.numberOfHumans += 1
+                else:
+                    self.numberOfAnimals += 1
                 self.passengers.append(passenger)
                 self.numberOfPassengers += 1
             return self.numberOfPassengers

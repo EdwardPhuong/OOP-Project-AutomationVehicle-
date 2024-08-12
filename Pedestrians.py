@@ -18,15 +18,17 @@ class Pedestrians:
         pedestrianTypes=["Human", "Animal"]
         pedestrianSelector = random.choice(pedestrianTypes)
         if str(pedestrianSelector) == "Human":
-            self.type = "Human"
+            type = "Human"
             human = Human.Human()
             pedestrian = human.getHuman()
             self.pedestrian = pedestrian
+            self.type = type
         elif str(pedestrianSelector) == "Animal":
-            self.type = "Animal"
+            type = "Animal"
             animal = Animal.Animal()
             pedestrian = animal.getAnimal()
             self.pedestrian = pedestrian
+            self.type = type
         return self
 
 if __name__ == "__main__":
