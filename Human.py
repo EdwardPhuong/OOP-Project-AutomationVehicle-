@@ -51,7 +51,7 @@ class Human:
             myAge = 0
             myAge = random.randint(1, 100) #Get Random Age
             #Set Generation
-            if myAge > 65:
+            if myAge > 75:
                 myGeneration = "Elder"
                 self.generation = myGeneration
                 self.age = myAge
@@ -125,10 +125,10 @@ class Human:
     def getPriority(self):
         try:
             if self.generation == "Elder":
-                self.priority += 3
+                self.priority += 2
                 return self.priority
             elif self.generation == "Young":
-                self.priority += 8
+                self.priority += 3
             else:
                 workbook = openpyxl.load_workbook('resources/humans.xlsx')
                 sheet = workbook['Sheet1']
@@ -155,3 +155,4 @@ class Human:
 if __name__ == "__main__":
     myhuman = Human()
     print(myhuman.getHuman())
+    

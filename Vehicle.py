@@ -57,7 +57,7 @@ class Vehicle:
     
     def loadPassenger(self):
         try:
-            for i in range(0, self.numberOfseat):
+            for i in range(self.numberOfseat):
                 passenger = Passenger.Passenger()
                 passenger.getPassenger()
                 if passenger.type == "Human":
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     myVehicle.getVehicle()
     passengers = myVehicle.loadPassenger()
     myVehicle.getTotalPriority()
-    myVehicle.getPassengers()
+    myPassenger = myVehicle.getPassengers()
     print(myVehicle)
-    # for passenger in passengers:
-    #     print(passenger.passenger)
+    for p in myPassenger[1]:
+        print(p)
