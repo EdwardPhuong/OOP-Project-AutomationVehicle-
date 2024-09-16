@@ -643,6 +643,9 @@ class MoralMachine:
             print(f"\nAlive Rate: {aliveResults[0]}")
             print(f"\nTotal Death Rate of Human: {humanRate[0]}%")
             print(f"\nTotal Alive Rate of Human: {humanRate[1]}%")
+            print(f"\nTotal Swerve Times: {self.swerveTimes}")
+            print(f"\nTotal Stay Times: {self.stayTimes}")
+            print(f"\nRun Through: {count} scenarios")
             print("------------------------------FINAL SUMMARY---------------------------------")
 
             return results
@@ -652,4 +655,4 @@ class MoralMachine:
 
 if __name__ == "__main__":
     myMoralMachine = MoralMachine()
-    test = myMoralMachine.testAlgorithm(500)
+    test = myMoralMachine.testAlgorithm(100)
