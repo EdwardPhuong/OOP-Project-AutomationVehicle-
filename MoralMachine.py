@@ -620,39 +620,49 @@ class MoralMachine:
 
                     self.decideSwerve(scenario, pedestrians, passengers, otherPedestrians)
             
-            results = self.getDeathResults(humanDict, animalDict, self.humansDeath, self.animalsDeath)
+            
+            deathResults = self.getDeathResults(humanDict, animalDict, self.humansDeath, self.animalsDeath)
             aliveResults = self.getAliveResults(humanDict, animalDict, self.humansAlive, self.animalsAlive)
             humanRate = self.rateCalculator(self.totalNumberOfHumans, self.numberOfHumansDeath, self.numberOfHumansAlive)
-            
-            print("------------------------------FINAL SUMMARY---------------------------------")
-            print(f"\nTotal Number Humans: {self.totalNumberOfHumans}")
-            print(f"Total Number Animals: {self.totalNumberOfAnimals}")
-            print(f"\nNumber of Dead Humans: {self.numberOfHumansDeath}")
-            print(f"Number of Alive Humans: {self.numberOfHumansAlive}")
-            print(f"\nNumber of Dead Animals: {self.numberOfAnimalsDeath}")
-            print(f"Number of Alive Animal: {self.numberOfAnimalsAlive}")
-            print(f"\nTotal Humans: {humanDict}")
-            print(f"\nTotal Animals: {animalDict}")
-            print(f"\nAlive Humans: {self.humansAlive}")
-            print(f"\nAlive Animals: {self.animalsAlive}")
-            print(f"\nDead Humans: {self.humansDeath}")
-            print(f"\nDead Animals: {self.animalsDeath}")
-            print(f"\nDeath Dictionary: {results[1]}")
-            print(f"\nDeath Rate: {results[0]}")
-            print(f"\nAlive Dictionary: {aliveResults[1]}")
-            print(f"\nAlive Rate: {aliveResults[0]}")
-            print(f"\nTotal Death Rate of Human: {humanRate[0]}%")
-            print(f"\nTotal Alive Rate of Human: {humanRate[1]}%")
-            print(f"\nTotal Swerve Times: {self.swerveTimes}")
-            print(f"\nTotal Stay Times: {self.stayTimes}")
-            print(f"\nRun Through: {count} scenarios")
-            print("------------------------------FINAL SUMMARY---------------------------------")
+            self.humanDict = humanDict
+            self.animalDict = animalDict
+            self.count = count
 
-            return results
+            return deathResults, aliveResults
         except Exception as e:
             print(f"Error: {e}")
+            
 
 
-if __name__ == "__main__":
+def main():
     myMoralMachine = MoralMachine()
     test = myMoralMachine.testAlgorithm(100)
+    deathResults = myMoralMachine.getDeathResults(myMoralMachine.humanDict, myMoralMachine.animalDict, myMoralMachine.humansDeath, myMoralMachine.animalsDeath)
+    aliveResults = myMoralMachine.getAliveResults(myMoralMachine.humanDict, myMoralMachine.animalDict, myMoralMachine.humansAlive, myMoralMachine.animalsAlive)
+    humanRate = myMoralMachine.rateCalculator(myMoralMachine.totalNumberOfHumans, myMoralMachine.numberOfHumansDeath, myMoralMachine.numberOfHumansAlive)
+    print("-----------------------------------------FINAL RESULTS-----------------------------------------")
+    print(f"\nTotal Number Humans: {myMoralMachine.totalNumberOfHumans}")
+    print(f"Total Number Animals: {myMoralMachine.totalNumberOfAnimals}")
+    print(f"\nNumber of Dead Humans: {myMoralMachine.numberOfHumansDeath}")
+    print(f"Number of Alive Humans: {myMoralMachine.numberOfHumansAlive}")
+    print(f"\nNumber of Dead Animals: {myMoralMachine.numberOfAnimalsDeath}")
+    print(f"Number of Alive Animal: {myMoralMachine.numberOfAnimalsAlive}")
+    print(f"\nTotal Humans: {myMoralMachine.humanDict}")
+    print(f"\nTotal Animals: {myMoralMachine.animalDict}")
+    print(f"\nAlive Humans: {myMoralMachine.humansAlive}")
+    print(f"\nAlive Animals: {myMoralMachine.animalsAlive}")
+    print(f"\nDead Humans: {myMoralMachine.humansDeath}")
+    print(f"\nDead Animals: {myMoralMachine.animalsDeath}")
+    print(f"\nFaltality Dictionary: {deathResults[1]}")
+    print(f"\nFaltality Rate: {deathResults[0]}")
+    print(f"\nAlive Dictionary: {aliveResults[1]}")
+    print(f"\nAlive Rate: {aliveResults[0]}")
+    print(f"\nTotal Death Rate of Human: {humanRate[0]}%")
+    print(f"\nTotal Alive Rate of Human: {humanRate[1]}%")
+    print(f"\nTotal Swerve Times: {myMoralMachine.swerveTimes}")
+    print(f"\nTotal Stay Times: {myMoralMachine.stayTimes}")
+    print(f"\nRun Through: {myMoralMachine.count} scenarios")
+    print("-----------------------------------------FINAL RESULTS-----------------------------------------")
+    
+if __name__ == "__main__":
+    main()
